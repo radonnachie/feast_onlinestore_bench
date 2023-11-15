@@ -1,0 +1,16 @@
+project: feast_proto
+# By default, the registry is a file (but can be turned into a more scalable SQL-backed registry)
+registry: /work/store/data/registry.db
+# The provider primarily specifies default offline / online stores & storing the registry in a given cloud
+provider: local
+
+offline_store:
+  type: file 
+
+online_store:
+  type: couchbase
+  path: "couchbase://couchbase"
+  username: "Administrator"
+  password: "admin1234"
+  timeout_seconds: 60
+entity_key_serialization_version: 2

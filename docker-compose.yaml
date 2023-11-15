@@ -1,0 +1,19 @@
+version: '2'
+services:
+  couchbase:
+    container_name: feast_osbench_couchbase
+    image: couchbase
+    ports:
+      - "8091:8091"
+    environment:
+      - USERNAME=Administrator
+      - PASSWORD=admin1234
+  
+  client:
+    container_name: feast_osbench_client
+    build:
+      context: .
+    volumes:
+      - .:/work/
+      - ../feast:/work/feast_src
+    command: /bin/bash -c "cd /work/store && feast apply && /work/ && python /work/benchmark.py"
